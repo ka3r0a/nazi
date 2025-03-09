@@ -3,88 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>برای نازی با عشق</title>
+  <title>با عشق برای نازی</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <div class="background-elements">
-      <!-- Heart pattern background -->
-      <div class="heart-pattern"></div>
-      
-      <!-- Animated gradient overlay -->
-      <div class="gradient-overlay"></div>
-      
-      <!-- Large floating hearts will be added by JS -->
-      <div id="large-hearts"></div>
-      
-      <!-- Rose petals will be added by JS -->
-      <div id="rose-petals"></div>
+  <div class="love-container">
+    <!-- Animated background -->
+    <div class="animated-background">
+      <div class="heart-bg"></div>
     </div>
 
-    <div class="clock-container">
-      <div class="header">
-        <h1>هر لحظه با تو نازی</h1>
-        <p>زمان می‌ایستد وقتی به تو فکر می‌کنم</p>
+    <!-- Floating elements -->
+    <div id="floating-elements" class="floating-elements"></div>
+
+    <!-- Main content -->
+    <div class="love-card">
+      <div class="card-header">
+        <div class="name-container">
+          <h1 class="name">نازی</h1>
+          <div class="heart-divider">
+            <div class="heart-left"></div>
+            <div class="heart-icon">❤️</div>
+            <div class="heart-right"></div>
+          </div>
+        </div>
+        <p class="subtitle">عشق زندگی من</p>
       </div>
 
-      <div class="clock">
-        <div class="time-container">
-          <div class="time-box" id="hours">00</div>
-          <div class="time-separator">:</div>
-          <div class="time-box" id="minutes">00</div>
-          <div class="time-separator">:</div>
-          <div class="time-box" id="seconds">00</div>
+      <div class="love-content">
+        <div class="love-poem">
+          <p>هر لحظه با تو، زندگی زیباتر می‌شود</p>
+          <p>هر نفس کنار تو، قلبم عاشق‌تر می‌شود</p>
         </div>
 
-        <!-- Pulsing hearts around the clock -->
-        <div id="clock-hearts"></div>
-        
-        <!-- Rotating heart -->
-        <div class="rotating-heart">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#ff4d6d" stroke="#ff4d6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
+        <div class="love-counter">
+          <div class="counter-container">
+            <div class="counter-heart">
+              <svg viewBox="0 0 512 512" width="100" height="100">
+                <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" fill="#ff6b95"/>
+              </svg>
+              <div class="counter-value">
+                <span id="days-count">0</span>
+                <span class="counter-label">روز</span>
+              </div>
+            </div>
+            <div class="counter-text">با هم بودن</div>
+          </div>
+        </div>
+
+        <div class="love-letter">
+          <div class="letter-paper">
+            <div class="letter-header">نازی عزیزم</div>
+            <div class="letter-content">
+              <p>هر روز که می‌گذرد، عشقم به تو بیشتر می‌شود. تو زیباترین هدیه‌ای هستی که زندگی به من داده است.</p>
+              <p>دوستت دارم، امروز، فردا و تا ابد...</p>
+            </div>
+            <div class="letter-footer">با عشق بی‌پایان</div>
+          </div>
+        </div>
+
+        <div class="love-actions">
+          <button id="love-button" class="love-button">
+            <span class="button-text">قلب من برای تو می‌تپد</span>
+            <span class="button-icon">❤️</span>
+          </button>
+        </div>
+
+        <div id="love-message" class="love-message">
+          <div class="message-content">
+            <p>نازی کوچولوی من، تو تمام دنیای منی</p>
+            <p>خیلی خیلی خیلی دوستت دارم</p>
+            <div class="message-hearts">
+              <span>❤️</span><span>❤️</span><span>❤️</span>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="button-container">
-        <button id="message-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#fff" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-          <span>اینجا کلیک کن</span>
-        </button>
-      </div>
-
-      <div class="message" id="love-message">
-        <p>نازی کوچولوم مرسی که کنارم هستی و خیلی خیلی خیلی دوستت دارم</p>
-      </div>
-
-      <!-- Floating hearts -->
-      <div id="floating-hearts"></div>
     </div>
 
-    <div class="bottom-dots">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+    <!-- Music player -->
+    <div class="music-player">
+      <button id="play-button" class="play-button">
+        <span id="play-icon">▶️</span>
+        <span id="pause-icon" style="display: none;">⏸️</span>
+      </button>
+      <div class="music-title">آهنگ عاشقانه برای تو</div>
+      <audio id="love-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-a-very-happy-christmas-897.mp3" type="audio/mpeg">
+      </audio>
     </div>
+  </div>
 
-    <!-- Initial popup message -->
-    <div class="name-message" id="name-message">
-      <div class="name-message-content">
-        <div class="big-heart">
-          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="#ff4d6d" stroke="#ff4d6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-        </div>
-        <h2>نازی</h2>
-        <p>تو زیباترین اتفاق زندگی من هستی</p>
+  <!-- Welcome overlay -->
+  <div id="welcome-overlay" class="welcome-overlay">
+    <div class="welcome-card">
+      <div class="welcome-heart">
+        <svg viewBox="0 0 512 512" width="150" height="150">
+          <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" fill="#ff6b95"/>
+        </svg>
       </div>
+      <h2 class="welcome-title">نازی عزیزم</h2>
+      <p class="welcome-text">این صفحه با عشق برای تو ساخته شده</p>
+      <button id="welcome-button" class="welcome-button">
+        <span>ورود به دنیای عشق</span>
+      </button>
     </div>
   </div>
 
