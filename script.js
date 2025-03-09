@@ -1,123 +1,177 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Clock functionality
-  function updateClock() {
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    
-    document.getElementById('hours').textContent = hours;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds;
-  }
+  // Welcome overlay
+  const welcomeOverlay = document.getElementById('welcome-overlay');
+  const welcomeButton = document.getElementById('welcome-button');
   
-  // Update clock every second
-  updateClock();
-  setInterval(updateClock, 1000);
+  welcomeButton.addEventListener('click', function() {
+    welcomeOverlay.style.opacity = '0';
+    setTimeout(() => {
+      welcomeOverlay.style.display = 'none';
+      // Start animations after welcome screen
+      createFloatingElements();
+      // Start counting days
+      countDays();
+    }, 500);
+  });
   
-  // Message button functionality
-  const messageButton = document.getElementById('message-button');
+  // Love button
+  const loveButton = document.getElementById('love-button');
   const loveMessage = document.getElementById('love-message');
   
-  messageButton.addEventListener('click', function() {
-    if (loveMessage.style.display === 'block') {
-      loveMessage.style.display = 'none';
-    } else {
-      loveMessage.style.display = 'block';
+  loveButton.addEventListener('click', function() {
+    loveMessage.classList.toggle('show');
+    
+    if (loveMessage.classList.contains('show')) {
+      // Add heart burst animation when showing message
+      createHeartBurst();
     }
   });
   
-  // Hide name message after 5 seconds
-  const nameMessage = document.getElementById('name-message');
-  setTimeout(function() {
-    nameMessage.style.animation = 'fadeOut 0.5s ease-out forwards';
-    setTimeout(() => {
-      nameMessage.style.display = 'none';
-    }, 500);
-  }, 5000);
+  // Music player
+  const playButton = document.getElementById('play-button');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon = document.getElementById('pause-icon');
+  const loveMusic = document.getElementById('love-music');
   
-  // Create pulsing hearts around the clock
-  const clockHearts = document.getElementById('clock-hearts');
-  for (let i = 0; i < 8; i++) {
-    const angle = (i / 8) * Math.PI * 2;
-    const x = Math.cos(angle) * 120;
-    const y = Math.sin(angle) * 120;
-    
-    const heart = document.createElement('div');
-    heart.className = 'clock-heart';
-    heart.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffb3c1" stroke="#ffb3c1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-      </svg>
-    `;
-    heart.style.left = `calc(50% + ${x}px)`;
-    heart.style.top = `calc(50% + ${y}px)`;
-    heart.style.animationDelay = `${i * 0.25}s`;
-    
-    clockHearts.appendChild(heart);
-  }
-  
-  // Create floating hearts
-  const floatingHearts = document.getElementById('floating-hearts');
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement('div');
-    heart.className = 'floating-heart';
-    
-    // Randomize heart size and color
-    const size = 16 + Math.floor(Math.random() * 12);
-    const colorNum = 300 + Math.floor(Math.random() * 3) * 100;
-    
-    heart.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="#ff${colorNum.toString(16)}" stroke="#ff${colorNum.toString(16)}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="heart-icon">
-        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-      </svg>
-    `;
-    
-    // Randomize position and animation
-    heart.style.left = `${Math.random() * 100}%`;
-    heart.style.opacity = 0.2 + Math.random() * 0.8;
-    heart.style.animationDuration = `${10 + Math.random() * 20}s`;
-    heart.style.animationDelay = `${Math.random() * 5}s`;
-    
-    floatingHearts.appendChild(heart);
-  }
-  
-  // Create large background hearts
-  const largeHearts = document.getElementById('large-hearts');
-  for (let i = 0; i < 15; i++) {
-    const heart = document.createElement('div');
-    heart.className = 'large-heart';
-    heart.textContent = '❤️';
-    
-    // Randomize position and animation
-    heart.style.left = `${Math.random() * 100}%`;
-    heart.style.top = `${Math.random() * 100}%`;
-    heart.style.transform = `rotate(${Math.random() * 360}deg)`;
-    heart.style.animationDuration = `${5 + Math.random() * 5}s`;
-    heart.style.animationDelay = `${Math.random() * 5}s`;
-    
-    largeHearts.appendChild(heart);
-  }
-  
-  // Create falling rose petals
-  const rosePetals = document.getElementById('rose-petals');
-  for (let i = 0; i < 20; i++) {
-    const petal = document.createElement('div');
-    petal.className = 'rose-petal';
-    petal.textContent = '🌹';
-    
-    // Randomize position and animation
-    petal.style.left = `${Math.random() * 100}%`;
-    petal.style.fontSize = `${10 + Math.random() * 20}px`;
-    petal.style.animationDuration = `${15 + Math.random() * 20}s`;
-    petal.style.animationDelay = `${Math.random() * 10}s`;
-    
-    rosePetals.appendChild(petal);
-  }
-  
-  // Animate bottom dots
-  const dots = document.querySelectorAll('.dot');
-  dots.forEach((dot, index) => {
-    dot.style.animation = `float 1.5s ease-in-out infinite ${index * 0.2}s`;
+  playButton.addEventListener('click', function() {
+    if (loveMusic.paused) {
+      loveMusic.play();
+      playIcon.style.display = 'none';
+      pauseIcon.style.display = 'inline';
+    } else {
+      loveMusic.pause();
+      playIcon.style.display = 'inline';
+      pauseIcon.style.display = 'none';
+    }
   });
+  
+  // Count days together (example start date)
+  function countDays() {
+    const startDate = new Date('2023-01-01'); // Change this to your actual start date
+    const today = new Date();
+    const timeDiff = Math.abs(today.getTime() - startDate.getTime());
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    
+    const daysCount = document.getElementById('days-count');
+    
+    // Animate counting
+    let count = 0;
+    const duration = 2000; // 2 seconds
+    const interval = 50; // Update every 50ms
+    const increment = daysDiff / (duration / interval);
+    
+    const timer = setInterval(() => {
+      count += increment;
+      if (count >= daysDiff) {
+        count = daysDiff;
+        clearInterval(timer);
+      }
+      daysCount.textContent = Math.floor(count);
+    }, interval);
+  }
+  
+  // Create floating elements
+  function createFloatingElements() {
+    const container = document.getElementById('floating-elements');
+    
+    // Create hearts
+    createElements(container, '❤️', 20);
+    
+    // Create flowers
+    createElements(container, '🌸', 15);
+    
+    // Create butterflies
+    createElements(container, '🦋', 10);
+  }
+  
+  function createElements(container, emoji, count) {
+    for (let i = 0; i < count; i++) {
+      const element = document.createElement('div');
+      element.className = 'floating-element';
+      element.textContent = emoji;
+      
+      // Random position
+      element.style.left = `${Math.random() * 100}%`;
+      element.style.top = `${Math.random() * 100}%`;
+      
+      // Random size
+      const size = 10 + Math.random() * 20;
+      element.style.fontSize = `${size}px`;
+      
+      // Random opacity
+      element.style.opacity = 0.1 + Math.random() * 0.7;
+      
+      // Random animation duration
+      const duration = 15 + Math.random() * 15;
+      element.style.animationDuration = `${duration}s`;
+      
+      // Random animation delay
+      element.style.animationDelay = `${Math.random() * 5}s`;
+      
+      // Random movement path
+      const x1 = Math.random() * 100 - 50;
+      const y1 = Math.random() * 100 - 50;
+      const x2 = Math.random() * 100 - 50;
+      const y2 = Math.random() * 100 - 50;
+      const x3 = Math.random() * 100 - 50;
+      const y3 = Math.random() * 100 - 50;
+      
+      const r1 = Math.random() * 90;
+      const r2 = Math.random() * 180;
+      const r3 = Math.random() * 270;
+      
+      element.style.setProperty('--x1', `${x1}px`);
+      element.style.setProperty('--y1', `${y1}px`);
+      element.style.setProperty('--x2', `${x2}px`);
+      element.style.setProperty('--y2', `${y2}px`);
+      element.style.setProperty('--x3', `${x3}px`);
+      element.style.setProperty('--y3', `${y3}px`);
+      
+      element.style.setProperty('--r1', `${r1}deg`);
+      element.style.setProperty('--r2', `${r2}deg`);
+      element.style.setProperty('--r3', `${r3}deg`);
+      
+      container.appendChild(element);
+    }
+  }
+  
+  // Create heart burst animation
+  function createHeartBurst() {
+    const burstContainer = document.createElement('div');
+    burstContainer.className = 'heart-burst';
+    document.body.appendChild(burstContainer);
+    
+    for (let i = 0; i < 50; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'burst-heart';
+      heart.textContent = '❤️';
+      
+      // Initial position at center
+      heart.style.left = '50%';
+      heart.style.top = '50%';
+      heart.style.transform = 'translate(-50%, -50%)';
+      
+      // Random size
+      const size = 10 + Math.random() * 20;
+      heart.style.fontSize = `${size}px`;
+      
+      burstContainer.appendChild(heart);
+      
+      // Animate to random position
+      setTimeout(() => {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 100 + Math.random() * 300;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        heart.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        heart.style.opacity = '0';
+      }, 10);
+    }
+    
+    // Remove burst container after animation
+    setTimeout(() => {
+      document.body.removeChild(burstContainer);
+    }, 2000);
+  }
 });
